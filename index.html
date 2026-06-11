@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>ポケモンバトル 3D</title>
+  <link rel="preconnect" href="https://pokeapi.co">
+  <link rel="preconnect" href="https://raw.githubusercontent.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== タイトル画面 ===== -->
+  <section id="screen-title" class="screen active">
+    <div class="title-sky">
+      <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+    </div>
+    <div class="title-inner">
+      <h1 class="game-logo">
+        <span class="logo-poke">ポケモン</span>
+        <span class="logo-battle">バトル<em>3D</em></span>
+      </h1>
+      <div class="title-ball"></div>
+      <button id="btn-start" class="big-btn pulse">▶ ぼうけんに でかける！</button>
+      <p class="title-hint">データ提供: <a href="https://pokeapi.co" target="_blank" rel="noopener">PokeAPI</a></p>
+    </div>
+  </section>
+
+  <!-- ===== ポケモン選択画面 ===== -->
+  <section id="screen-select" class="screen">
+    <h2 class="select-heading">パートナーを えらぼう！</h2>
+    <div id="select-grid" class="select-grid"></div>
+  </section>
+
+  <!-- ===== ローディング画面 ===== -->
+  <section id="screen-loading" class="screen">
+    <div class="loading-inner">
+      <div class="pokeball-spinner"></div>
+      <p id="loading-text">バトルの じゅんびちゅう…</p>
+    </div>
+  </section>
+
+  <!-- ===== バトル画面 ===== -->
+  <section id="screen-battle" class="screen">
+    <div id="battle-scene" class="scene">
+      <div class="sky">
+        <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+      </div>
+      <div class="arena">
+        <div class="platform platform-enemy"><div class="platform-top"></div></div>
+        <div class="platform platform-player"><div class="platform-top"></div></div>
+        <div class="sprite-wrap enemy-wrap" id="enemy-sprite-wrap">
+          <img id="enemy-sprite" class="poke-sprite enemy-sprite" alt="">
+          <div class="sprite-shadow"></div>
+        </div>
+        <div class="sprite-wrap player-wrap" id="player-sprite-wrap">
+          <img id="player-sprite" class="poke-sprite player-sprite" alt="">
+          <div class="sprite-shadow"></div>
+        </div>
+      </div>
+
+      <!-- 敵の情報プレート -->
+      <div id="enemy-plate" class="info-plate enemy-plate">
+        <div class="plate-row">
+          <span id="enemy-name" class="plate-name"></span>
+          <span id="enemy-level" class="plate-level"></span>
+        </div>
+        <div class="hp-row">
+          <span class="hp-label">HP</span>
+          <div class="hp-bar"><div id="enemy-hp-fill" class="hp-fill"></div></div>
+        </div>
+      </div>
+
+      <!-- 自分の情報プレート -->
+      <div id="player-plate" class="info-plate player-plate">
+        <div class="plate-row">
+          <span id="player-name" class="plate-name"></span>
+          <span id="player-level" class="plate-level"></span>
+        </div>
+        <div class="hp-row">
+          <span class="hp-label">HP</span>
+          <div class="hp-bar"><div id="player-hp-fill" class="hp-fill"></div></div>
+        </div>
+        <div id="player-hp-text" class="hp-text"></div>
+      </div>
+
+      <div id="fx-layer"></div>
+    </div>
+
+    <!-- メッセージ＆コマンド -->
+    <div class="bottom-panel">
+      <div id="message-box" class="message-box">
+        <p id="message-text"></p>
+        <span id="message-next" class="message-next hidden">▼</span>
+      </div>
+      <div id="command-menu" class="command-menu hidden">
+        <button class="cmd-btn cmd-fight" id="btn-fight">⚔ たたかう</button>
+        <button class="cmd-btn cmd-run" id="btn-run">🏃 にげる</button>
+      </div>
+      <div id="move-menu" class="move-menu hidden">
+        <div id="move-grid" class="move-grid"></div>
+        <button id="btn-move-back" class="cmd-btn cmd-back">↩ もどる</button>
+      </div>
+    </div>
+
+    <button id="btn-sound" class="sound-toggle" title="おとの オン/オフ">🔊</button>
+  </section>
+
+  <!-- ===== 結果画面 ===== -->
+  <section id="screen-result" class="screen">
+    <div class="result-inner">
+      <h2 id="result-title" class="result-title"></h2>
+      <img id="result-img" class="result-img" alt="">
+      <p id="result-text" class="result-text"></p>
+      <div class="result-btns">
+        <button id="btn-rematch" class="big-btn">⚔ もういちど たたかう</button>
+        <button id="btn-newpoke" class="big-btn alt">🔄 ポケモンを かえる</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== エラー画面 ===== -->
+  <section id="screen-error" class="screen">
+    <div class="result-inner">
+      <h2 class="result-title">あれれ…？</h2>
+      <p id="error-text" class="result-text">つうしんが うまくいかなかったみたい。<br>もういちど ためしてね！</p>
+      <button id="btn-retry" class="big-btn">🔁 もういちど ためす</button>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/battle.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
